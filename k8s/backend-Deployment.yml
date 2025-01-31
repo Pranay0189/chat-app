@@ -1,0 +1,23 @@
+apiVersion: apps/v1 # Fixed typo: "apiversion" → "apiVersion"
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: chat-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: chat-app-backend-container
+        image: tony878/chat-backend:latest
+        ports:
+        - containerPort: 5001
+        env:
+        - name: NODE_ENV
+          value: production
